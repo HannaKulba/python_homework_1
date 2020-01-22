@@ -10,8 +10,8 @@ Python course, SENLA
 ## Run files
 1. Clone project `https://github.com/HannaKulba/python_homework_1.git`
 2. Open cmd / terminal
-3. Go to folder with project `.../venv/Include`
-4. Run `py file_name.py`
+3. Go to folder with project `.../tasks`
+4. Run `file_name.py`
 5. Profit!
 
 
