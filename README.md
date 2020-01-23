@@ -4,7 +4,7 @@ Python course, SENLA
 
 ## Author
 
-[Anna Kulba] (https://github.com/HannaKulba)
+[Anna Kulba](https://github.com/HannaKulba)
 
 ## Python version
 ```
