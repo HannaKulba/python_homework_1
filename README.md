@@ -1,6 +1,7 @@
 # Python course, SENLA, 2020
 
 Python course, SENLA
+Homework №1
 
 ## Author
 
