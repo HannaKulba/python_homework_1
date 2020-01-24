@@ -1,16 +1,16 @@
-textArray = [str(i) for i in input().split()]
-popularWord = ""
-countPopularWord = 0
-longWord = ""
-lengthLongWord = 0
+text_array = input().split()
+popular_word = ""
+count_popular_word = 0
+long_word = ""
+length_long_word = 0
 
-for word in textArray:
-    if textArray.count(word) > countPopularWord:
-        countPopularWord = textArray.count(word)
-        popularWord = word
+for word in text_array:
+    if text_array.count(word) > count_popular_word:
+        count_popular_word = text_array.count(word)
+        popular_word = word
 
-    if len(word) > lengthLongWord:
-        lengthLongWord = len(word)
-        longWord = word
+    if len(word) > length_long_word:
+        length_long_word = len(word)
+        long_word = word
 
-print(popularWord, longWord)
+print(popular_word, long_word)
