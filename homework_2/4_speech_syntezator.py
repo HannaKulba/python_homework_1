@@ -72,7 +72,7 @@ def from_20_till_90(number):
         return 'fifty' + ' ' + till_10(number % 10)
     elif 80 <= number < 90:
         return 'eighty' + ' ' + till_10(number % 10)
-    elif number in range(60, 80) or number in range(90, 100):
+    elif 60 <= number < 80 or 90 <= number < 100:
         return till_10(number // 10) + 'ty' + ' ' + till_10(number % 10)
 
 

@@ -11,7 +11,7 @@ def get_game_results(list):
     results = []
 
     for string in list:
-        l = re.findall('[XO\.]', string)
+        l = re.findall('[XO.]', string)
         results.append(l)
 
     def determine_winner(ch):

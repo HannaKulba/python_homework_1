@@ -25,6 +25,6 @@ def sort_by_count_decrease(list):
     print(result_list)
 
 
-data_list = ['bob', 'bob', 'carl', 'alex', 'bob']
-#[7, 8, 6, 5, 4, 7, 7, 8, 9, 0, 8, 7, 4, 4, 4, 0]
+data_list = [7, 8, 6, 5, 4, 7, 7, 8, 9, 0, 8, 7, 4, 4, 4, 0]
+#['bob', 'bob', 'carl', 'alex', 'bob']
 sort_by_count_decrease(data_list)
