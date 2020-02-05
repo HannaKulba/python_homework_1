@@ -12,13 +12,13 @@
 
 def syntezate_speech(number):
     if number <= 10:
-        print(till_10(number))
+        return till_10(number)
     elif 10 < number < 20:
-        print(from_11_till_19(number))
+        return from_11_till_19(number)
     elif 20 <= number < 100:
-        print(from_20_till_90(number))
+        return from_20_till_90(number)
     elif 100 <= number <= 1000:
-        print(from_100_till_1000(number))
+        return from_100_till_1000(number)
 
 
 def till_10(number):
@@ -93,5 +93,6 @@ def from_100_till_1000(number):
         return result
 
 
-n = int(input())
-syntezate_speech(n)
+if __name__ == '__main__':
+    n = int(input())
+    print(syntezate_speech(n))

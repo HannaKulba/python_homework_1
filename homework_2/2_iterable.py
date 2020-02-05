@@ -17,14 +17,15 @@ def sort_by_count_decrease(list):
         dict_s_c.update({a: count})
 
     sorted_by_decrease_dict = sorted(dict_s_c.items(), key=lambda kv: kv[1], reverse=True)
-    
+
     for i in sorted_by_decrease_dict:
         for j in range(i[1]):
             result_list.append(i[0])
-    
-    print(result_list)
+
+    return result_list
 
 
-data_list = [7, 8, 6, 5, 4, 7, 7, 8, 9, 0, 8, 7, 4, 4, 4, 0]
-#['bob', 'bob', 'carl', 'alex', 'bob']
-sort_by_count_decrease(data_list)
+if __name__ == '__main__':
+    data_list = [7, 8, 6, 5, 4, 7, 7, 8, 9, 0, 8, 7, 4, 4, 4, 0]
+    # ['bob', 'bob', 'carl', 'alex', 'bob']
+    print(sort_by_count_decrease(data_list))

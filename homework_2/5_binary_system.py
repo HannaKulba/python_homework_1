@@ -9,8 +9,9 @@
 
 
 def checkio(number):
-    print(bin(number).count('1'))
+    return bin(number).count('1')
 
 
-n = int(input())
-checkio(n)
+if __name__ == '__main__':
+    n = int(input())
+    print(checkio(n))

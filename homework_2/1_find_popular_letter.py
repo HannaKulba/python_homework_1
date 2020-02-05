@@ -28,8 +28,9 @@ def find_popular_letter(s):
             if ord(popular_letter) > ord(k):
                 popular_letter = k
 
-    print(popular_letter)
+    return popular_letter
 
 
-string = input()
-find_popular_letter(string)
+if __name__ == '__main__':
+    string = input()
+    print(find_popular_letter(string))

@@ -47,14 +47,15 @@ def get_winner(list):
     check_winner = get_game_results(list)
 
     if check_winner('X'):
-        print('X')
+        return 'X'
     elif check_winner('O'):
-        print('O')
+        return 'O'
     else:
-        print('D')
+        return 'D'
 
 
-get_winner([
-    "OOX",
-    "XXO",
-    "OXX"])
+if __name__ == '__main__':
+    print(get_winner([
+        "OOX",
+        "XXO",
+        "OXX"]))
