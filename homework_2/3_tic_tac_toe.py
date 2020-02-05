@@ -35,7 +35,7 @@ def get_game_results(list):
             return True
         elif results[0][0] == ch and results[1][1] == ch and results[2][2] == ch:
             return True
-        elif results[0][1] == ch and results[1][1] == ch and results[2][0] == ch:
+        elif results[0][2] == ch and results[1][1] == ch and results[2][0] == ch:
             return True
         else:
             return False
