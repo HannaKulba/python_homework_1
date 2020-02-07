@@ -14,7 +14,7 @@ def get_game_results(input_game_results_list):
         results_array = re.findall('[XO.]', string)
         game_results_matrix.append(results_array)
 
-    def determine_winner(character):
+    def determine_winner(char):
         count_0 = 0
         count_1 = 0
         count_2 = 0
@@ -23,23 +23,23 @@ def get_game_results(input_game_results_list):
 
         for results_array in game_results_matrix:
             # check if winner is on horizontal line
-            if results_array.count(character) == 3:
+            if results_array.count(char) == 3:
                 return True
             # check if winner is on vertical line
-            if results_array[0] == character:
+            if results_array[0] == char:
                 count_0 += 1
-            if results_array[1] == character:
+            if results_array[1] == char:
                 count_1 += 1
-            if results_array[2] == character:
+            if results_array[2] == char:
                 count_2 += 1
 
         if count_0 == 3 or count_1 == 3 or count_2 == 3:
             return True
-        elif game_results_matrix[0][0] == character and game_results_matrix[1][1] == character and \
-                game_results_matrix[2][2] == character:
+        elif game_results_matrix[0][0] == char and game_results_matrix[1][1] == char and \
+                game_results_matrix[2][2] == char:
             return True
-        elif game_results_matrix[0][2] == character and game_results_matrix[1][1] == character and \
-                game_results_matrix[2][0] == character:
+        elif game_results_matrix[0][2] == char and game_results_matrix[1][1] == char and \
+                game_results_matrix[2][0] == char:
             return True
         else:
             return False
