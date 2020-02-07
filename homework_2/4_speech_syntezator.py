@@ -22,43 +22,17 @@ def synthesize_speech(number):
 
 
 def numbers_till_10(number):
-    if number == 0:
-        return ''
-    elif number == 1:
-        return 'one'
-    elif number == 2:
-        return 'two'
-    elif number == 3:
-        return 'three'
-    elif number == 4:
-        return 'four'
-    elif number == 5:
-        return 'five'
-    elif number == 6:
-        return 'six'
-    elif number == 7:
-        return 'seven'
-    elif number == 8:
-        return 'eight'
-    elif number == 9:
-        return 'nine'
-    elif number == 10:
-        return 'ten'
+    numbers_words = {0: '', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight',
+                     9: 'nine', 10: 'ten'}
+    return numbers_words[number]
 
 
 def numbers_from_11_till_19(number):
-    if number == 11:
-        return 'eleven'
-    elif number == 12:
-        return 'twelve'
-    elif number == 13:
-        return 'thirteen'
-    elif number == 15:
-        return 'fifteen'
-    elif number == 18:
-        return 'eighteen'
-    elif number in [14, 16, 17, 19]:
+    numbers_words = {11: 'eleven', 12: 'twelve', 13: 'thirteen', 15: 'fifteen', 18: 'eighteen'}
+    if number in [14, 16, 17, 19]:
         return numbers_till_10(number % 10) + 'teen'
+    else:
+        return numbers_words[number]
 
 
 def numbers_from_20_till_90(number):
