@@ -13,5 +13,5 @@ def checkio(number):
 
 
 if __name__ == '__main__':
-    n = int(input())
-    print(checkio(n))
+    input_number = int(input())
+    print(checkio(input_number))

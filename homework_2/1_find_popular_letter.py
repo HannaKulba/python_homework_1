@@ -10,23 +10,23 @@
 import re
 
 
-def find_popular_letter(s):
-    s = re.findall('[a-z]', s.lower())
-    dict_l_c = {}
-    max_count = s.count(s[0])
+def find_popular_letter(input_string):
+    input_string = re.findall('[a-z]', input_string.lower())
+    dict_letter_count = {}
+    letter_max_count = input_string.count(input_string[0])
     popular_letter = ''
 
-    for l in s:
-        count = s.count(l)
-        if count >= max_count:
-            max_count = count
-            dict_l_c.update({l: count})
-            popular_letter = l
+    for letter in input_string:
+        count = input_string.count(letter)
+        if count >= letter_max_count:
+            letter_max_count = count
+            dict_letter_count.update({letter: count})
+            popular_letter = letter
 
-    for k in dict_l_c.keys():
-        if dict_l_c[k] == max_count:
-            if ord(popular_letter) > ord(k):
-                popular_letter = k
+    for letter in dict_letter_count.keys():
+        if dict_letter_count[letter] == letter_max_count:
+            if ord(popular_letter) > ord(letter):
+                popular_letter = letter
 
     return popular_letter
 
