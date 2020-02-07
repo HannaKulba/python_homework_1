@@ -52,6 +52,7 @@ if __name__ == '__main__':
     days = int(input('Укажите количество дней: '))
     cost = travel_cost(direction, days)
     if type(cost) is float:
-        print('Путешествие в ' + direction + ' на ' + str(days) + ' день/дня/дней стоит ' + str(cost) + '.')
+        print(
+            'Путешествие в ' + direction + ' на ' + str(days) + ' день/дня(ей) стоит ' + str(cost) + ' попугаев(я,й).')
     else:
         print('Невозможно определить стоимость поездки.')
