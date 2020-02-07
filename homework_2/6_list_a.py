@@ -11,11 +11,11 @@ def get_list(matrix, result_list=None):
     for element in matrix:
         if type(element) is list:
             for elem in element:
-                if type(elem) is int or type(elem) is str or type(elem) is bool:
-                    result_list.append(elem)
-                elif type(elem) is list:
+                if type(elem) is list:
                     get_list(elem, result_list)
-        elif type(element) is int or type(element) is str or type(element) is bool:
+                else:
+                    result_list.append(elem)
+        else:
             result_list.append(element)
     return result_list
 
