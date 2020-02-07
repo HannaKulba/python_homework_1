@@ -4,40 +4,29 @@
 ############################################################################
 
 def get_hotel_cost(nights):
-    PRICE_ONE_NIGHT = 120
-    return nights * PRICE_ONE_NIGHT
+    price_one_night = 120
+    return nights * price_one_night
 
 
 def get_ticket_cost(direction):
-    CHARLOTTE_TICKET_PRICE = 183
-    TAMPA_TICKET_PRICE = 220
-    PITTSBURGH_TICKET_PRICE = 222
-    LOS_ANGELES_TICKET_PRICE = 475
-
-    if direction == 'Шарлотта':
-        return CHARLOTTE_TICKET_PRICE
-    elif direction == 'Тампа':
-        return TAMPA_TICKET_PRICE
-    elif direction == 'Питтсбург':
-        return PITTSBURGH_TICKET_PRICE
-    elif direction == 'Лос-Анджелес':
-        return LOS_ANGELES_TICKET_PRICE
-    else:
+    price_directions = {'Шарлотта': 183, 'Тампа': 220, 'Питтсбург': 222, 'Лос-Анджелес': 475}
+    try:
+        return price_directions[direction]
+    except KeyError:
         print('Билетов на данное направление нет!')
-        return
 
 
 def get_car_rent_cost(days):
-    CAR_RENT_PRICE = 40
-    COEFFICIENT_DISCOUNT_7_DAYS_AND_MORE = 0.1
-    COEFFICIENT_DISCOUNT_3_7_DAYS = 0.05
+    car_rent_price = 40
+    coefficient_discount_7_days_and_more = 0.1
+    coefficient_discount_3_7_days = 0.05
 
     if days >= 7:
-        return (CAR_RENT_PRICE * days) - (CAR_RENT_PRICE * days) * COEFFICIENT_DISCOUNT_7_DAYS_AND_MORE
+        return (car_rent_price * days) - (car_rent_price * days) * coefficient_discount_7_days_and_more
     elif 3 <= days < 7:
-        return (CAR_RENT_PRICE * days) - (CAR_RENT_PRICE * days) * COEFFICIENT_DISCOUNT_3_7_DAYS
+        return (car_rent_price * days) - (car_rent_price * days) * coefficient_discount_3_7_days
     else:
-        return CAR_RENT_PRICE * days
+        return car_rent_price * days
 
 
 def travel_cost(direction, days):
@@ -51,7 +40,7 @@ if __name__ == '__main__':
     direction = input('Укажите направление: ')
     days = int(input('Укажите количество дней: '))
     cost = travel_cost(direction, days)
-    if type(cost) is float or type(cost) is int:
+    if cost is not None:
         print('Путешествие в ' + direction + ' на ' + str(days) + ' день/дня(ей) стоит ' + str(cost) + ' попугаев(я,й).')
     else:
         print('Невозможно определить стоимость поездки.')
