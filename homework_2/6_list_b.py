@@ -6,12 +6,12 @@
 #######################################################################
 
 def get_list(matrix):
-    for a in matrix:
-        if type(a) is list:
-            index = matrix.index(a)
-            a = a[::-1]
-            matrix[index] = a
-            get_list(a)
+    for element in matrix:
+        if type(element) is list:
+            index = matrix.index(element)
+            element = element[::-1]
+            matrix[index] = element
+            get_list(element)
     return matrix[::-1]
 
 
