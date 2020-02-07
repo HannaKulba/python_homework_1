@@ -22,6 +22,9 @@ def get_ticket_cost(direction):
         return PITTSBURGH_TICKET_PRICE
     elif direction == 'Лос-Анджелес':
         return LOS_ANGELES_TICKET_PRICE
+    else:
+        print('Билетов на данное направление нет!')
+        return
 
 
 def get_car_rent_cost(days):
@@ -38,8 +41,17 @@ def get_car_rent_cost(days):
 
 
 def travel_cost(direction, days):
-    return get_hotel_cost(days) + get_ticket_cost(direction) + get_car_rent_cost(days)
+    try:
+        return get_hotel_cost(days) + get_ticket_cost(direction) + get_car_rent_cost(days)
+    except TypeError:
+        return None
 
 
 if __name__ == '__main__':
-    print(travel_cost("Шарлотта", 10))
+    direction = input('Укажите направление: ')
+    days = int(input('Укажите количество дней: '))
+    cost = travel_cost(direction, days)
+    if type(cost) is float:
+        print('Путешествие в ' + direction + ' на ' + str(days) + ' день/дня/дней стоит ' + str(cost) + '.')
+    else:
+        print('Невозможно определить стоимость поездки.')
