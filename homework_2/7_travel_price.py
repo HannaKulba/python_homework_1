@@ -51,8 +51,7 @@ if __name__ == '__main__':
     direction = input('Укажите направление: ')
     days = int(input('Укажите количество дней: '))
     cost = travel_cost(direction, days)
-    if type(cost) is float:
-        print(
-            'Путешествие в ' + direction + ' на ' + str(days) + ' день/дня(ей) стоит ' + str(cost) + ' попугаев(я,й).')
+    if type(cost) is float or type(cost) is int:
+        print('Путешествие в ' + direction + ' на ' + str(days) + ' день/дня(ей) стоит ' + str(cost) + ' попугаев(я,й).')
     else:
         print('Невозможно определить стоимость поездки.')
