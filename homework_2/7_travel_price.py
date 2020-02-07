@@ -9,9 +9,9 @@ def get_hotel_cost(nights):
 
 
 def get_ticket_cost(direction):
-    price_directions = {'Шарлотта': 183, 'Тампа': 220, 'Питтсбург': 222, 'Лос-Анджелес': 475}
+    prices = {'Шарлотта': 183, 'Тампа': 220, 'Питтсбург': 222, 'Лос-Анджелес': 475}
     try:
-        return price_directions[direction]
+        return prices[direction]
     except KeyError:
         print('Билетов на данное направление нет!')
 
