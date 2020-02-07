@@ -5,22 +5,20 @@
 # out [1, 2, 3, 4, 5, 6, 7]
 ################################################################################
 
-res = []
-
-
-def get_list(matrix):
-    global res
-    for a in matrix:
-        if type(a) is list:
-            for l in a:
-                if type(l) is int or type(l) is str or type(l) is bool:
-                    res.append(l)
-                elif type(l) is list:
-                    get_list(l)
-        elif type(a) is int or type(a) is str or type(a) is bool:
-            res.append(a)
-    return res
+def get_list(matrix, result_list=None):
+    if result_list is None:
+        result_list = []
+    for element in matrix:
+        if type(element) is list:
+            for elem in element:
+                if type(elem) is int or type(elem) is str or type(elem) is bool:
+                    result_list.append(elem)
+                elif type(elem) is list:
+                    get_list(elem, result_list)
+        elif type(element) is int or type(element) is str or type(element) is bool:
+            result_list.append(element)
+    return result_list
 
 
 if __name__ == '__main__':
-    print(get_list([7,[6, 5], [4, 3], 2, 1]))
+    print(get_list([[1, 2, [3, 4]], [5, 6], 7]))
