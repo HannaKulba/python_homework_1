@@ -1,51 +1,37 @@
+import numpy as np
+
+
 def determine_winner(char, game_matrix):
     length = len(game_matrix[0])
     width = len(game_matrix)
     winner_count = width
-    diagonals_number = 2  # default value
     if width > length:
         winner_count = length
-        diagonals_number = (width - length + 1) * 2
-    else:
-        diagonals_number = (length - width + 1) * 2
 
-    # check if winner is on horizontal line
-    if check_winner_by_line(winner_count, char, game_matrix) == char:
-        return char
-    # check if winner is on vertical line
     rotated_game_matrix = rotate_matrix(game_matrix)
-    if check_winner_by_line(winner_count, char, rotated_game_matrix) == char:
+    # check if winner is on horizontal line
+    # check if winner is on vertical line
+    # check winner by diagonal
+    if check_winner_by_line(winner_count, char, game_matrix) == char or \
+            check_winner_by_line(winner_count, char, rotated_game_matrix) == char or \
+            check_winner_by_diagonal(winner_count, char, game_matrix) == char:
         return char
 
-    counter = winner_count
-    if width < diagonals_number // 2 or length < diagonals_number // 2:
-        counter = diagonals_number // 2
 
-    counts = []  # for diagonals
-    for _ in range(diagonals_number * 2):
-        counts.append('')
-    return check_winner_by_diagonal(counts, counter, winner_count, char, game_matrix)
-
-
-def check_winner_by_diagonal(counts, count, winner_count, char, game_matrix):
-    # check if winner is by diagonal (from left to right corner)
-    for index in range(count):
-        for index_1 in range(index, count + index):
-            counts[index] += game_matrix[index_1][index]
-
-    # check if winner is by diagonal (from right to left corner)
-    for index in reversed(range(count)):
-        for index_1 in range(count - index - 1, count * 2 - index - 1):
-            counts[count * 2 - index - 1] += game_matrix[index_1][index]
-
-    rotated_counts = rotate_matrix(counts)
-    for diagonal in rotated_counts:
-        check_winner_str = char * winner_count
-        diagonal_str = ''
-        for elem in diagonal:
-            diagonal_str += elem
-        if check_winner_str in diagonal_str:
-            return char
+def check_winner_by_diagonal(winner_count, char, game_matrix):
+    length = len(game_matrix[0])
+    width = len(game_matrix)
+    check_winner_str = char * winner_count
+    matrix = np.array(game_matrix)
+    diagonals = [matrix[::-1, :].diagonal(i) for i in range(-length + 1, width)]
+    diagonals.extend(matrix.diagonal(i) for i in range(width - 1, -length, -1))
+    for diagonal in diagonals:
+        if len(diagonal) == winner_count:
+            diagonal_str = ''
+            for elem in diagonal:
+                diagonal_str += elem
+            if check_winner_str == diagonal_str:
+                return char
 
 
 def check_winner_by_line(winner_count, char, game_matrix):
@@ -67,7 +53,7 @@ def rotate_matrix(game_matrix):
 
 
 def is_winner(gamer, mark, game_matrix):
-    if 0 <= gamer[0] < len(game_matrix[0]) and 0 <= gamer[1] < len(game_matrix):
+    if 0 <= gamer[0] < len(game_matrix) and 0 <= gamer[1] < len(game_matrix[0]):
         if game_matrix[gamer[0]][gamer[1]] == '.':
             game_matrix[gamer[0]][gamer[1]] = mark
             draw_current_game(game_matrix)
