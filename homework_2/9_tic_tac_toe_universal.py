@@ -60,7 +60,7 @@ def is_winner(gamer, mark, game_matrix):
 def print_winner(game_matrix):
     X = 'X'  # gamer_1 mark
     O = 'O'  # gamer_2 mark
-    DRAW = len(game_matrix) * len(game_matrix[0]) - 1
+    DRAW = len(game_matrix) * len(game_matrix[0]) - 2
     count_draw = 0
     count = 0
     result = ''
