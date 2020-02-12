@@ -6,6 +6,8 @@
 ###################################################################################
 import re
 
+WINNER_DETECTOR_NUMBER = 3
+
 
 def get_game_results(input_game_results_list):
     game_results_matrix = []
@@ -14,37 +16,46 @@ def get_game_results(input_game_results_list):
         results_array = re.findall('[XO.]', string)
         game_results_matrix.append(results_array)
 
-    def determine_winner(char):
-        count_0 = 0
-        count_1 = 0
-        count_2 = 0
-
+    def is_winner(char):
         nonlocal game_results_matrix
+        horizontal_res = check_winner_on_horizontal_line(game_results_matrix, char)
+        vertical_res = check_winner_on_vertical_line(game_results_matrix, char)
+        diagonals_res = check_winner_by_diagonal(game_results_matrix, char)
 
-        for results_array in game_results_matrix:
-            # check if winner is on horizontal line
-            if results_array.count(char) == 3:
-                return True
-            # check if winner is on vertical line
-            if results_array[0] == char:
-                count_0 += 1
-            if results_array[1] == char:
-                count_1 += 1
-            if results_array[2] == char:
-                count_2 += 1
+        if horizontal_res or vertical_res or diagonals_res:
+            return True
 
-        if count_0 == 3 or count_1 == 3 or count_2 == 3:
-            return True
-        elif game_results_matrix[0][0] == char and game_results_matrix[1][1] == char and \
-                game_results_matrix[2][2] == char:
-            return True
-        elif game_results_matrix[0][2] == char and game_results_matrix[1][1] == char and \
-                game_results_matrix[2][0] == char:
-            return True
-        else:
-            return False
+    return is_winner
 
-    return determine_winner
+
+def check_winner_on_horizontal_line(game_matrix, char):
+    for results_array in game_matrix:
+        if results_array.count(char) == WINNER_DETECTOR_NUMBER:
+            return True
+
+
+def check_winner_on_vertical_line(game_matrix, char):
+    def check_column(column_number):
+        count = 0
+        for results_array in game_matrix:
+            if results_array[column_number] == char:
+                count += 1
+
+        if count == WINNER_DETECTOR_NUMBER:
+            return True
+
+    if check_column(0) or check_column(1) or check_column(2):
+        return True
+
+
+def check_winner_by_diagonal(game_matrix, char):
+    def diagonal(cell_1, cell_2, cell_3):
+        if game_matrix[cell_1[0]][cell_1[1]] == char and game_matrix[cell_2[0]][cell_2[1]] == char and \
+                game_matrix[cell_3[0]][cell_3[1]] == char:
+            return True
+
+    if diagonal((0, 0), (1, 1), (2, 2)) or diagonal((0, 2), (1, 1), (2, 0)):
+        return True
 
 
 def get_winner(input_game_results_list):
