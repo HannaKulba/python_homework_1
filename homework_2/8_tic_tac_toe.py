@@ -1,72 +1,92 @@
 ################################################
-# написать игру крестики нолики,
+# написать игру крестики нолики (3х3),
 # игроки поочередно вводят координаты в консоль
 ################################################
 
+MATRIX_SIZE = 3
 
-def determine_winner(char, game_matrix):
-    count_0 = 0
-    count_1 = 0
-    count_2 = 0
 
-    for array in game_matrix:
-        # check if winner is on horizontal line
-        if array.count(char) == 3:
-            return char
-        # check if winner is on vertical line
-        if array[0] == char:
-            count_0 += 1
-        if array[1] == char:
-            count_1 += 1
-        if array[2] == char:
-            count_2 += 1
+def check_winner_on_horizontal_line(game_matrix, char):
+    for results_array in game_matrix:
+        if results_array.count(char) == MATRIX_SIZE:
+            return True
 
-    if count_0 == 3 or count_1 == 3 or count_2 == 3:
-        return char
-    elif game_matrix[0][0] == char and game_matrix[1][1] == char and game_matrix[2][2] == char:
-        return char
-    elif game_matrix[0][2] == char and game_matrix[1][1] == char and game_matrix[2][0] == char:
-        return char
-    else:
-        return ''
+
+def check_winner_on_vertical_line(game_matrix, char):
+    def check_column(column_number):
+        count = 0
+        for results_array in game_matrix:
+            if results_array[column_number] == char:
+                count += 1
+
+        if count == MATRIX_SIZE:
+            return True
+
+    if check_column(0) or check_column(1) or check_column(2):
+        return True
+
+
+def check_winner_by_diagonal(game_matrix, char):
+    def diagonal(cell_1, cell_2, cell_3):
+        if game_matrix[cell_1[0]][cell_1[1]] == char and game_matrix[cell_2[0]][cell_2[1]] == char and \
+                game_matrix[cell_3[0]][cell_3[1]] == char:
+            return True
+
+    if diagonal((0, 0), (1, 1), (2, 2)) or diagonal((0, 2), (1, 1), (2, 0)):
+        return True
+
+
+def get_winner(char, game_matrix):
+    horizontal_res = check_winner_on_horizontal_line(game_matrix, char)
+    vertical_res = check_winner_on_vertical_line(game_matrix, char)
+    diagonals_res = check_winner_by_diagonal(game_matrix, char)
+
+    if horizontal_res or vertical_res or diagonals_res:
+        return True
 
 
 def is_winner(gamer, mark, game_matrix):
     if 0 <= gamer[0] <= 2 and 0 <= gamer[1] <= 2:
         if game_matrix[gamer[0]][gamer[1]] == '':
             game_matrix[gamer[0]][gamer[1]] = mark
-            return determine_winner(mark, game_matrix)
+            return get_winner(mark, game_matrix)
         else:
             print('ERROR! This field is not empty!')
     else:
         print('IndexError! Out of matrix bounds')
 
 
-def print_winner():
-    game_matrix = [['', '', ''], ['', '', ''], ['', '', '']]
-    # the number of moves after which a draw occurs, if no one has won before
-    DRAW = 8
-    # number of moves during the current game
-    count = 0
+def gamer_move(move_num, char, game_matrix):
+    gamer = [int(i) for i in input('gamer ' + str(move_num) + ': ').split()]
+    if is_winner(gamer, char, game_matrix):
+        return char
+    else:
+        return ''
+
+
+def play_and_print_winner(gamer_1_mark, gamer_2_mark):
+    game_matrix = [['' for _ in range(MATRIX_SIZE)] for _ in range(MATRIX_SIZE)]  # create empty matrix
+    draw = 8  # the number of moves after which a draw occurs, if no one has won before
+    count = 0  # number of moves during the current game
     result = ''
     while result == '':
         count += 2
 
-        gamer_1 = [int(i) for i in input('gamer 1: ').split()]
-        if is_winner(gamer_1, 'X', game_matrix) == 'X':
-            result = 'X'
+        result = gamer_move(1, gamer_1_mark, game_matrix)  # gamer_1
+        if result == gamer_1_mark:
             break
 
-        gamer_2 = [int(i) for i in input('gamer 2: ').split()]
-        if is_winner(gamer_2, 'O', game_matrix) == 'O':
-            result = 'O'
+        result = gamer_move(2, gamer_2_mark, game_matrix)  # gamer_2
+        if result == gamer_2_mark:
             break
 
-        if count >= DRAW:
+        if count >= draw:
             result = 'D'
             break
     print(result)
 
 
 if __name__ == '__main__':
-    print_winner()
+    gamer_1_mark = input('Gamer #1 will play with (X or O): ')
+    gamer_2_mark = input('Gamer #2 will play with: ')
+    play_and_print_winner(gamer_1_mark, gamer_2_mark)
