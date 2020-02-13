@@ -56,8 +56,8 @@ def is_winner(gamer, mark, game_matrix):
         print('IndexError! Out of matrix bounds')
 
 
-def gamer_move(move_num, char, game_matrix):
-    gamer = [int(i) for i in input('gamer ' + str(move_num) + ': ').split()]
+def gamer_move(gamer_num, char, game_matrix):
+    gamer = [int(i) for i in input('gamer ' + str(gamer_num) + ': ').split()]
     if is_winner(gamer, char, game_matrix):
         return char
     else:

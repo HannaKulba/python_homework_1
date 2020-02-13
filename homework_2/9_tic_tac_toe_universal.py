@@ -9,11 +9,11 @@ def determine_winner(char, game_matrix):
         winner_count = length
 
     rotated_game_matrix = rotate_matrix(game_matrix)
-    # check if winner is on horizontal line
-    # check if winner is on vertical line
-    if check_winner_by_line(winner_count, char, game_matrix) == char or \
-            check_winner_by_line(winner_count, char, rotated_game_matrix) == char or \
-            check_winner_by_diagonal(winner_count, char, game_matrix) == char:
+    horizontal_res = check_winner_by_line(winner_count, char, game_matrix)
+    vertical_res = check_winner_by_line(winner_count, char, rotated_game_matrix)
+    diagonals_res = check_winner_by_diagonal(winner_count, char, game_matrix)
+
+    if horizontal_res == char or vertical_res == char or diagonals_res == char:
         return char
 
 
@@ -66,33 +66,6 @@ def is_winner(gamer, mark, game_matrix):
         print('IndexError! List index out of range.')
 
 
-def print_winner(game_matrix):
-    X = 'X'  # gamer_1 mark
-    O = 'O'  # gamer_2 mark
-    DRAW = len(game_matrix) * len(game_matrix[0]) - 2
-    count_draw = 0
-    count = 0
-    result = ''
-    while result == '':
-        count += 1
-        count_draw += 2
-        print('Game #' + str(count))
-        gamer_1 = [int(i) for i in input('gamer 1: ').split()]
-        if is_winner(gamer_1, X, game_matrix) == X:
-            result = X
-            break
-
-        gamer_2 = [int(i) for i in input('gamer 2: ').split()]
-        if is_winner(gamer_2, O, game_matrix) == O:
-            result = O
-            break
-
-        if count_draw >= DRAW:
-            result = 'D'
-            break
-    print(result)
-
-
 def draw_current_game(game_matrix):
     for array in game_matrix:
         for element in array:
@@ -109,7 +82,41 @@ def create_empty_matrix(length, width):
         return game_matrix
 
 
+def gamer_move(gamer_num, char, game_matrix):
+    gamer = [int(i) for i in input('gamer ' + str(gamer_num) + ': ').split()]
+    if is_winner(gamer, char, game_matrix):
+        return char
+    else:
+        return ''
+
+
+def play_and_print_winner(gamer_1_mark, gamer_2_mark, game_matrix):
+    draw = len(game_matrix) * len(game_matrix[0]) - 2
+    draw_count = 0
+    game_count = 0
+    result = ''
+    while result == '':
+        game_count += 1
+        draw_count += 2
+        print('Game #' + str(game_count))
+
+        result = gamer_move(1, gamer_1_mark, game_matrix)
+        if result == gamer_1_mark:
+            break
+
+        result = gamer_move(2, gamer_2_mark, game_matrix)
+        if result == gamer_2_mark:
+            break
+
+        if draw_count >= draw:
+            result = 'D'
+            break
+    print(result)
+
+
 if __name__ == '__main__':
-    game_matrix_size = [int(i) for i in input().split()]
-    matrix = create_empty_matrix(game_matrix_size[0], game_matrix_size[1])  # columns rows
-    print_winner(matrix)
+    game_matrix_size = [int(i) for i in input('Enter game field size (number columns and rows): ').split()]
+    gamer_1_mark = input('Gamer #1 will play with (X or O): ')
+    gamer_2_mark = input('Gamer #2 will play with: ')
+    matrix = create_empty_matrix(game_matrix_size[0], game_matrix_size[1])
+    play_and_print_winner(gamer_1_mark, gamer_2_mark, matrix)
