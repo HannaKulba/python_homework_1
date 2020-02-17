@@ -2,9 +2,9 @@ def memoized(maxsize=0):
     def actual_decorator(func):
         memory = {}
 
-        def wrapper(*args):
+        def wrapper(*args, **kwargs):
             memoization_key = str(args[0]) + ' ' + str(args[1])
-            result = func(*args)
+            result = func(*args, **kwargs)
             if memoization_key not in memory:
                 if len(memory) >= maxsize:
                     lastKey = list(memory.keys())[len(memory) - 1]
