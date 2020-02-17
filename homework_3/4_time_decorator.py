@@ -1,10 +1,8 @@
 import time
 import requests
-import functools
 
 
 def execution_time(func):
-    @functools.wraps(func)
     def wrapper(url):
         start_time = time.time()
         content = func(url)
