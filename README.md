@@ -4,7 +4,8 @@
 - Homework №2
 - Homework №3
 - Homework №4
-
+- Homework №5
+- Homework №7
 ## Author
 
 [Anna Kulba](https://github.com/HannaKulba)
